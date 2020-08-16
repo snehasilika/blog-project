@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+ {%extends 'base.html'%}
+ {%block title %}POST DETAILS{%endblock%}
+ {%block content%}
+ <h1>ALL POST DETAILS</h1>
+    <h1>{{post.title}}</h1> 
+    <p id='date'>{{post.title}} <br>Published on {{post.publish}} by {{post.author|title}}</p>
+    
+ {%endblock%} 

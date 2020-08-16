@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+ {%extends 'base.html'%}
+ {%block title %}Sneha{%endblock%}
+ {%block content%}
+ <h1>India Blog</h1>
+     {%for post in post_list %}
+     <h2> <a href="{{post.get_absolute_url}}">{{post.title}}</a> </h2>
+      <p id='date'>Published on {{post.publish}} by {{post.author|title}}</p>
+     {{post.body}} 
+     {%endfor%}
+     {% include 'pagination.html' with page=page_obj%}
+ {%endblock%} 
