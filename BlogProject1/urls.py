@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from testapp import views
-from testapp.models import Post
+from blog import views
+from blog.models import Post
 from django.views.generic import ListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',views.post_list_view),
-   # path('',views.PostListView.as_view()),
+    path('',views.PostListView.as_view()),
     #path('detail',views.post_detail_view),
-    path('',views.ListView.as_view(queryset=Post.objects.filter(status='published'),paginate_by=1,template_name='post_list.html')),
-    path('detail/<int:year>/<int:month>/<int:day>/<str:post>/',views.post_detail_view,name='post_detail')
+    #path('',views.ListView.as_view(queryset=Post.objects.filter(status='published'),paginate_by=1,template_name='post_list.html')),
+    path('detail/<int:year>/<int:month>/<int:day>/<str:post>/',views.post_detail_view,name='post_detail'),
+    path('<id>/share/',views.mail_send_view)
+
 ]

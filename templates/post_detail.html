@@ -2,8 +2,31 @@
  {%extends 'base.html'%}
  {%block title %}POST DETAILS{%endblock%}
  {%block content%}
- <h1>ALL POST DETAILS</h1>
-    <h1>{{post.title}}</h1> 
-    <p id='date'>{{post.title}} <br>Published on {{post.publish}} by {{post.author|title}}</p>
+    <h1>{{post_detail.title}}</h1> 
+    <p id='date'>{{post_detail.title}} <br>Published on {{post_detail.publish}} by {{post_detail.author|title}}</p>
+    {{post_detail.body}}<br><br><br>
+    <a href="/{{post_detail.id}}/share" class="btn btn-success">Share Post By Email</a>
+    {% with comments.count as comments_count %}
+    <h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2>
+    {% endwith%} 
+    {%if comments %}
+       {%for comment in comments %} 
+          <div class="cb">{{comment.body|linebreaks}}</div>
+          <p id='ch'> comment {{forloop.counter}} by {{comment.name}} on {{comment.created}}</p>
+          
+          
+      {%endfor%}
+      {%else%}
+      <p>There are NO Comments Yet !!!</p> 
+    {%endif%} 
+    {%if csubmit %} 
+     <h2>Your Comment Added Succefully</h2>
+     {%else%}
+     <form method="post">
+       {{form.as_p}}
+       {%csrf_token%}
+       <input type="submit" name="" value="Submit Comment">
+     </form> 
+    {%endif%} 
     
  {%endblock%} 
