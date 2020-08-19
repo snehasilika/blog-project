@@ -18,14 +18,16 @@ from django.urls import path
 from blog import views
 from blog.models import Post
 from django.views.generic import ListView
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('',views.post_list_view),
-    path('',views.PostListView.as_view()),
+    path('',views.post_list_view),
+    #path('',views.PostListView.as_view()),
     #path('detail',views.post_detail_view),
     #path('',views.ListView.as_view(queryset=Post.objects.filter(status='published'),paginate_by=1,template_name='post_list.html')),
     path('detail/<int:year>/<int:month>/<int:day>/<str:post>/',views.post_detail_view,name='post_detail'),
-    path('<id>/share/',views.mail_send_view)
+    path('<id>/share/',views.mail_send_view),
+    path('tag/<tag_slug>', views.post_list_view, name='post_list_by_tag_name')
 
 ]
